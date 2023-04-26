@@ -1,4 +1,4 @@
 [submodule "calcom"]
-	path = calcom
-	url = https://github.com/calcom/cal.com.git
-	branch = main
+path = calcom
+url = https://github.com/vaam-io/vaam-calendar.git
+branch = main
