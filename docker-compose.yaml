@@ -4,6 +4,7 @@ version: '3.8'
 volumes:
   database-data:
 
+
 networks:
   stack:
     name: stack
@@ -21,7 +22,7 @@ services:
       - stack
 
   calcom:
-    image: calcom.docker.scarf.sh/calcom/cal.com
+    image: ghcr.io/vaam-io/vaam-cal:latest
     build:
       context: .
       dockerfile: Dockerfile
@@ -43,22 +44,21 @@ services:
       - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DATABASE_HOST}/${POSTGRES_DB}
     depends_on:
       - database
-
-# Optional use of Prisma Studio. In production, comment out or remove the section below to prevent unwanted access to your database.
-  studio:
-    image: calcom.docker.scarf.sh/calcom/cal.com
-    restart: always
-    networks:
-      - stack
-    ports:
-      - 5555:5555
-    env_file: .env
-    environment:
-      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DATABASE_HOST}/${POSTGRES_DB}
-    depends_on:
-      - database
-    command:
-      - npx
-      - prisma
-      - studio
-# END SECTION: Optional use of Prisma Studio.
+  # Optional use of Prisma Studio. In production, comment out or remove the section below to prevent unwanted access to your database.
+  # studio:
+  #   image: calcom.docker.scarf.sh/calcom/cal.com
+  #   restart: always
+  #   networks:
+  #     - stack
+  #   ports:
+  #     - 5555:5555
+  #   env_file: .env
+  #   environment:
+  #     - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DATABASE_HOST}/${POSTGRES_DB}
+  #   depends_on:
+  #     - database
+  #   command:
+  #     - npx
+  #     - prisma
+  #     - studio
+  # END SECTION: Optional use of Prisma Studio.
